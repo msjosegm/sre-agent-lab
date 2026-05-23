@@ -100,7 +100,7 @@ for title, desc in pains:
 add_text_box(slide, 7.5, 1.6, 5, 0.5, "The cost", 22, DARK_BLUE, True)
 costs = [
     "MTTR measured in hours, not minutes",
-    "Engineer burnout and attrition", 
+    "Engineer burnout and attrition",
     "Customer satisfaction drops",
     "80% of response = gathering data",
 ]
@@ -172,17 +172,17 @@ add_bg(slide, WHITE)
 add_text_box(slide, 0.8, 0.4, 11, 0.8, "Three Personas — What You'll Try Today", 36, DARK_BLUE, True)
 
 scenarios = [
-    ("IT Operations / SRE", 
+    ("IT Operations / SRE",
      '"Stop running runbooks at 3am"',
      "Alert fires → agent auto-investigates\nusing your runbook → remediates\n→ creates GitHub issue with findings",
      "You wake up to results,\nnot raw alerts",
      AZURE_BLUE),
-    ("Developer", 
+    ("Developer",
      '"From what happened to why + how to fix"',
      "Same investigation + source code\nsearch → finds exact file:line\n→ creates richer issue with fix",
      "Compare two GitHub issues\n— see the delta",
      RGBColor(0x5B, 0x2C, 0x8B)),
-    ("Workflow Automation", 
+    ("Workflow Automation",
      '"Triage isn\'t the job, it\'s the tax"',
      "Agent triages GitHub issues:\nclassify → label → comment\nRuns on schedule, automatically",
      "Stop sorting tickets.\nStart shipping.",
@@ -295,7 +295,7 @@ add_text_box(slide, 1, 3, 11, 1, "Open your lab instructions and follow along", 
 links = [
     ("Portal", "sre.azure.com"),
     ("Documentation", "sre.azure.com/docs"),
-    ("Lab Repo", "github.com/dm-chelupati/sre-agent-lab"),
+    ("Lab Repo", "github.com/msjosegm/sre-agent-lab"),
 ]
 y = 4.5
 for label, url in links:
@@ -313,7 +313,7 @@ add_text_box(slide, 0.8, 0.4, 11, 0.8, "Resources", 36, DARK_BLUE, True)
 resources = [
     ("SRE Agent Portal", "sre.azure.com"),
     ("Documentation", "sre.azure.com/docs"),
-    ("Lab Source Code", "github.com/dm-chelupati/sre-agent-lab"),
+    ("Lab Source Code", "github.com/msjosegm/sre-agent-lab"),
     ("Blog", "aka.ms/sreagent/blog"),
     ("Samples", "github.com/microsoft/sre-agent/tree/main/samples"),
 ]

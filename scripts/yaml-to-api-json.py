@@ -12,7 +12,7 @@ import yaml, json, sys, os
 
 yaml_file = sys.argv[1]
 output_file = sys.argv[2] if len(sys.argv) > 2 else "/tmp/subagent-body.json"
-github_repo = sys.argv[3] if len(sys.argv) > 3 else os.environ.get("GITHUB_REPO", "dm-chelupati/grubify")
+github_repo = sys.argv[3] if len(sys.argv) > 3 else os.environ.get("GITHUB_REPO", "msjosegm/grubify")
 
 with open(yaml_file) as f:
     data = yaml.safe_load(f)

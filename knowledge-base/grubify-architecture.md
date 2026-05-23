@@ -56,9 +56,9 @@ done
 
 ## Source Code
 
-- **GitHub repository:** [github.com/dm-chelupati/grubify](https://github.com/dm-chelupati/grubify)
+- **GitHub repository:** [github.com/msjosegm/grubify](https://github.com/msjosegm/grubify)
 - **Language:** Node.js
-- **Container image:** `ghcr.io/dm-chelupati/grubify:latest`
+- **Container image:** `ghcr.io/msjosegm/grubify:latest`
 
 ### Key Files
 

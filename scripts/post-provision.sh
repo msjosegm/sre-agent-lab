@@ -92,9 +92,9 @@ GITHUB_USER=$(azd env get-value GITHUB_USER 2>/dev/null || echo "")
 if echo "$GITHUB_USER" | grep -q "ERROR\|not found"; then
   GITHUB_USER=""
 fi
-# Build the repo name from username (defaults to dm-chelupati if not set)
+# Build the repo name from username (defaults to msjosegm if not set)
 export GITHUB_REPO="${GITHUB_USER:+${GITHUB_USER}/grubify}"
-GITHUB_REPO="${GITHUB_REPO:-dm-chelupati/grubify}"
+GITHUB_REPO="${GITHUB_REPO:-msjosegm/grubify}"
 export GITHUB_REPO
 
 if [ -z "$AGENT_ENDPOINT" ] || [ -z "$AGENT_NAME" ]; then
@@ -107,7 +107,7 @@ echo "📦 RG:    ${RESOURCE_GROUP}"
 echo ""
 
 # ── Step 0: Build & deploy Grubify via ACR (cloud-side, no local clone needed) ─
-GRUBIFY_REPO="https://github.com/dm-chelupati/grubify.git"
+GRUBIFY_REPO="https://github.com/msjosegm/grubify.git"
 
 if [ -n "$SKIP_BUILD" ]; then
   echo "🐳 Step 0/5: ⏭️  Skipped (--skip-build or --retry)"
@@ -463,7 +463,7 @@ except: pass
 
 $PYTHON -c "
 import json, os
-repo = os.environ.get('GITHUB_REPO', 'dm-chelupati/grubify')
+repo = os.environ.get('GITHUB_REPO', 'msjosegm/grubify')
 body = {'name':'triage-grubify-issues','description':f'Triage customer issues in {repo} every 12 hours','cronExpression':'0 */12 * * *','agentPrompt':f'Use the issue-triager subagent to list all open issues in {repo} that have [Customer Issue] in the title and have not been triaged yet. For each untriaged customer issue, classify it, add labels, and post a triage comment following the triage runbook in the knowledge base.','agent':'issue-triager'}
 with open('${TEMP_DIR}/scheduled-task-body.json', 'w') as f: json.dump(body, f)
 "

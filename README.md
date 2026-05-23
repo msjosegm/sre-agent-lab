@@ -55,7 +55,7 @@ bash scripts/prereqs.sh
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/dm-chelupati/sre-agent-lab.git
+git clone https://github.com/msjosegm/sre-agent-lab.git
 cd sre-agent-lab
 git submodule update --init --recursive
 
@@ -73,7 +73,7 @@ azd up
 
 ```cmd
 REM 1. Clone the repo (in CMD or PowerShell)
-git clone https://github.com/dm-chelupati/sre-agent-lab.git
+git clone https://github.com/msjosegm/sre-agent-lab.git
 cd sre-agent-lab
 git submodule update --init --recursive
 
@@ -111,7 +111,7 @@ Deployment takes ~8-12 minutes.
 
 | Role | Scope | Purpose |
 |------|-------|---------|
-| SRE Agent Administrator | Agent resource | User can manage agent via data plane APIs | 
+| SRE Agent Administrator | Agent resource | User can manage agent via data plane APIs |
 | Reader | Resource group | Agent can read all resources |
 | Monitoring Reader | Resource group | Agent can read metrics and alerts |
 | Log Analytics Reader | Log Analytics workspace | Agent can query logs via KQL |
