@@ -7,7 +7,7 @@ param location string
 // ============================================================
 // Variables
 // ============================================================
-var uniqueSuffix = uniqueString(resourceGroup().id, environmentName)
+var uniqueSuffix = 'virtualdom'
 var agentName = 'sre-agent-${uniqueSuffix}'
 var logAnalyticsName = 'law-${uniqueSuffix}'
 var appInsightsName = 'appi-${uniqueSuffix}'
