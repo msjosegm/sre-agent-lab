@@ -33,3 +33,5 @@ spec:
   agent_type: Autonomous
   tools:
     - SearchMemory
+  mcp_tools:
+    - github-mcp/*

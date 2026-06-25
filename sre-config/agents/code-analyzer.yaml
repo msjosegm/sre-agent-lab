@@ -35,3 +35,5 @@ spec:
     - QueryLogAnalyticsByWorkspaceId
     - QueryAppInsightsByResourceId
     - ExecutePythonCode
+  mcp_tools:
+    - github-mcp/*
