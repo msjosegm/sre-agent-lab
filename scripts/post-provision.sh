@@ -384,50 +384,50 @@ echo ""
 # ── Step 4: GitHub integration ───────────────────────────────────────────────
 echo "🔗 Step 4/5: GitHub integration..."
 
-# Create GitHub OAuth connector via data plane API (no PAT needed)
-echo "   Creating GitHub OAuth connector..."
-TOKEN=$(get_token)
-RESULT=$(curl -s -o /dev/null -w "%{http_code}" \
-  -X PUT "${AGENT_ENDPOINT}/api/v2/extendedAgent/connectors/github" \
-  -H "Authorization: Bearer ${TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d '{"name":"github","type":"AgentConnector","properties":{"dataConnectorType":"GitHubOAuth","dataSource":"github-oauth"}}')
-if [ "$RESULT" = "200" ] || [ "$RESULT" = "201" ]; then
-  echo "   ✅ GitHub OAuth connector created"
-else
-  echo "   ⚠️  GitHub connector returned HTTP ${RESULT}"
-fi
+# # Create GitHub OAuth connector via data plane API (no PAT needed)
+# echo "   Creating GitHub OAuth connector..."
+# TOKEN=$(get_token)
+# RESULT=$(curl -s -o /dev/null -w "%{http_code}" \
+#   -X PUT "${AGENT_ENDPOINT}/api/v2/extendedAgent/connectors/github" \
+#   -H "Authorization: Bearer ${TOKEN}" \
+#   -H "Content-Type: application/json" \
+#   -d '{"name":"github","type":"AgentConnector","properties":{"dataConnectorType":"GitHubOAuth","dataSource":"github-oauth"}}')
+# if [ "$RESULT" = "200" ] || [ "$RESULT" = "201" ]; then
+#   echo "   ✅ GitHub OAuth connector created"
+# else
+#   echo "   ⚠️  GitHub connector returned HTTP ${RESULT}"
+# fi
 
-# Get OAuth login URL for user to authorize
-TOKEN=$(get_token)
-OAUTH_URL=$(curl -s "${AGENT_ENDPOINT}/api/v1/github/config" \
-  -H "Authorization: Bearer ${TOKEN}" 2>/dev/null | $PYTHON -c "
-import sys, json
-try:
-    d = json.load(sys.stdin)
-    print(d.get('oAuthUrl', '') or d.get('OAuthUrl', '') or '')
-except: print('')
-" 2>/dev/null)
+# # Get OAuth login URL for user to authorize
+# TOKEN=$(get_token)
+# OAUTH_URL=$(curl -s "${AGENT_ENDPOINT}/api/v1/github/config" \
+#   -H "Authorization: Bearer ${TOKEN}" 2>/dev/null | $PYTHON -c "
+# import sys, json
+# try:
+#     d = json.load(sys.stdin)
+#     print(d.get('oAuthUrl', '') or d.get('OAuthUrl', '') or '')
+# except: print('')
+# " 2>/dev/null)
 
-# Create GitHub OAuth connector via ARM (needed for OAuth flow to fully work)
-echo "   Creating GitHub OAuth connector via ARM..."
-TOKEN=$(get_token)
-ARM_RESULT=$(az rest --method PUT \
-  --url "https://management.azure.com${AGENT_RESOURCE_ID}/DataConnectors/github?api-version=${API_VERSION}" \
-  --body '{"properties":{"dataConnectorType":"GitHubOAuth","dataSource":"github-oauth"}}' \
-  -o none 2>&1 || true)
-echo "   ✅ GitHub OAuth connector (ARM)"
+# # Create GitHub OAuth connector via ARM (needed for OAuth flow to fully work)
+# echo "   Creating GitHub OAuth connector via ARM..."
+# TOKEN=$(get_token)
+# ARM_RESULT=$(az rest --method PUT \
+#   --url "https://management.azure.com${AGENT_RESOURCE_ID}/DataConnectors/github?api-version=${API_VERSION}" \
+#   --body '{"properties":{"dataConnectorType":"GitHubOAuth","dataSource":"github-oauth"}}' \
+#   -o none 2>&1 || true)
+# echo "   ✅ GitHub OAuth connector (ARM)"
 
-# Add code repo with authConnectorName linking to the GitHub OAuth connector
-echo "   Adding ${GITHUB_REPO} code repository..."
-TOKEN=$(get_token)
-REPO_NAME=$(echo "$GITHUB_REPO" | cut -d'/' -f2)
-curl -s -o /dev/null -w "" \
-  -X PUT "${AGENT_ENDPOINT}/api/v2/repos/${REPO_NAME}" \
-  -H "Authorization: Bearer ${TOKEN}" \
-  -H "Content-Type: application/json" \
-  -d "{\"name\":\"${REPO_NAME}\",\"type\":\"CodeRepo\",\"properties\":{\"url\":\"https://github.com/${GITHUB_REPO}\",\"authConnectorName\":\"github\"}}"
-echo "   ✅ Code repo: ${GITHUB_REPO}"
+# # Add code repo with authConnectorName linking to the GitHub OAuth connector
+# echo "   Adding ${GITHUB_REPO} code repository..."
+# TOKEN=$(get_token)
+# REPO_NAME=$(echo "$GITHUB_REPO" | cut -d'/' -f2)
+# curl -s -o /dev/null -w "" \
+#   -X PUT "${AGENT_ENDPOINT}/api/v2/repos/${REPO_NAME}" \
+#   -H "Authorization: Bearer ${TOKEN}" \
+#   -H "Content-Type: application/json" \
+#   -d "{\"name\":\"${REPO_NAME}\",\"type\":\"CodeRepo\",\"properties\":{\"url\":\"https://github.com/${GITHUB_REPO}\",\"authConnectorName\":\"github\"}}"
+# echo "   ✅ Code repo: ${GITHUB_REPO}"
 
 # Upload triage runbook
 TOKEN=$(get_token)
@@ -482,15 +482,15 @@ fi
 echo ""
 echo "   GitHub integration: ✅ Configured"
 
-if [ -n "$OAUTH_URL" ]; then
-  echo ""
-  echo "   ┌──────────────────────────────────────────────────────────┐"
-  echo "   │  Sign in to GitHub to authorize the SRE Agent:          │"
-  echo "   │  ${OAUTH_URL}"
-  echo "   │  Open this URL in your browser and click 'Authorize'    │"
-  echo "   └──────────────────────────────────────────────────────────┘"
-fi
-echo ""
+# if [ -n "$OAUTH_URL" ]; then
+#   echo ""
+#   echo "   ┌──────────────────────────────────────────────────────────┐"
+#   echo "   │  Sign in to GitHub to authorize the SRE Agent:          │"
+#   echo "   │  ${OAUTH_URL}"
+#   echo "   │  Open this URL in your browser and click 'Authorize'    │"
+#   echo "   └──────────────────────────────────────────────────────────┘"
+# fi
+# echo ""
 
 # ── Verification: Show what was set up ────────────────────────────────────────
 echo ""
